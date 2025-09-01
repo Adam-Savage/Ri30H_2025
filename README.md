@@ -1,4 +1,3 @@
-# Road Runner Quickstart
+# Ri30H AUS FTC Repository
 
-Check out the [docs](https://rr.brott.dev/docs/v1-0/tuning/).
-
+Check out our [socials](linktr.ee/ausftc).
