@@ -27,7 +27,7 @@ import java.util.List;
 @Config
 @TeleOp
 
-public class Adam_Teleop extends LinearOpMode {
+public class Riley_Teleop extends LinearOpMode {
     private AprilTagProcessor aprilTag;
     private boolean USE_WEBCAM = true;
     private VisionPortal visionPortal;
@@ -39,7 +39,8 @@ public class Adam_Teleop extends LinearOpMode {
     public static double latchOpen = 0.38;
     public static double latchClosed = 0;
 
-    public static float velocity = -6300;
+    public static float velocityOne = -9000;
+    public static float velocityTwo = -6800;
     public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(250,0,0,0);
 
     @Override
@@ -98,7 +99,8 @@ public class Adam_Teleop extends LinearOpMode {
         while (opModeIsActive()) {
             telemetry.addData("Shoot One", "%.2f", shootOne.getVelocity(AngleUnit.DEGREES));
             telemetry.addData("Shoot Two", "%.2f", shootTwo.getVelocity(AngleUnit.DEGREES));
-            telemetry.addData("Velocity", "%.2f", velocity);
+            telemetry.addData("Velocity One", "%.2f", velocityOne);
+            telemetry.addData("Velocity Two", "%.2f", velocityTwo);
             telemetry.update();
 
             TelemetryPacket packet = new TelemetryPacket();
@@ -167,8 +169,8 @@ public class Adam_Teleop extends LinearOpMode {
 //            }
 
             if(gamepad2.dpad_down){
-                shootOne.setVelocity(velocity, AngleUnit.DEGREES);
-                shootTwo.setVelocity(velocity, AngleUnit.DEGREES);
+                shootOne.setVelocity(velocityOne, AngleUnit.DEGREES);
+                shootTwo.setVelocity(velocityTwo, AngleUnit.DEGREES);
             } else{
                 shootOne.setVelocity(0);
                 shootTwo.setVelocity(0);
