@@ -69,6 +69,7 @@ public class Wollongong_Scrim extends LinearOpMode {
         DcMotorEx shootOne = hardwareMap.get(DcMotorEx.class, "shootOne");
         DcMotorEx shootTwo = hardwareMap.get(DcMotorEx.class, "shootTwo");
 
+        intake.setDirection(DcMotorSimple.Direction.REVERSE);
         shootOne.setDirection(DcMotorSimple.Direction.REVERSE);
         shootTwo.setDirection(DcMotorSimple.Direction.FORWARD);
         //Used for traditional setVelocity code
@@ -148,21 +149,21 @@ public class Wollongong_Scrim extends LinearOpMode {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
-            if (gamepad2.right_bumper) {
-                intake.setPower(1);
-            } else if (gamepad2.dpad_up) {
-                intake.setPower(-1);
-            } else {
-                intake.setPower(0);
-            }
-
-            if (gamepad2.a) {
-                indexer.setPower(1);
-            } else if (gamepad2.b) {
-                indexer.setPower(-1);
-            } else {
-                indexer.setPower(0);
-            }
+//            if (gamepad2.right_bumper) {
+//                intake.setPower(1);
+//            } else if (gamepad2.dpad_up) {
+//                intake.setPower(-1);
+//            } else if (!gamepad2.y){
+//                intake.setPower(0);
+//            }
+//
+//            if (gamepad2.a) {
+//                indexer.setPower(1);
+//            } else if (gamepad2.b) {
+//                indexer.setPower(-1);
+//            } else if (!gamepad2.y){
+//                indexer.setPower(0);
+//            }
 
             if(gamepad2.dpad_down){
                 shootOne.setVelocity(velocity, AngleUnit.DEGREES);
@@ -173,6 +174,14 @@ public class Wollongong_Scrim extends LinearOpMode {
             }
             shootOne.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, MOTOR_VELO_PID);
             shootTwo.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, MOTOR_VELO_PID);
+
+            if(gamepad2.y && shootOne.getVelocity(AngleUnit.DEGREES) < -5800) {
+                indexer.setPower(1);
+                intake.setPower(1);
+            } else {
+                indexer.setPower(0);
+                intake.setPower(0);
+            }
 
             if (gamepad2.x) {
                 latch.setPosition(latchOpen);
